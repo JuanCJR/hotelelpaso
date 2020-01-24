@@ -12,10 +12,8 @@ function getHabDisponible($idtipoHabitacion){
 
     return $disponibles;
 
-}
-function deleteReserva($id){
-    echo "ok";
-}
+} 
+
 
 function getReservas($id){
     $con =mysqli_connect('localhost','root','','hoteldb');
@@ -27,10 +25,14 @@ function getReservas($id){
     $arreglo = array();
     $i = 1;
     while($row = mysqli_fetch_array($resultado)){
+        echo '<form method="POST" action="includes/deleteReserva.php">';
         echo "<tr>";
         echo "<td>";
+        echo '<input style="border:0px"; type="text" readonly name="txtID" value=';
         echo $row['idReservaciones'];
+        echo ' "/>';
         $arreglo[$i] = $row['idReservaciones'];
+        echo "</input>";
         echo "</td>";
         echo "<td>";
         echo $row['tipoHabitacion'];
@@ -42,14 +44,75 @@ function getReservas($id){
         echo $row['costo'];
         echo "</td>";
         echo "<td>";
-        echo "<button class='btn btn-danger' onclick='delete($arreglo[$i]);'>";
+        echo "<button class='btn btn-danger type='submit'>";
         echo 'Cancelar reserva</button>';
+        echo "<a class='btn btn-success' href='./modificaReserva.php'>";
+        echo 'Modificar Reserva</a>';
         echo "</td>";
         echo "</tr>";
+        echo "</form>";
+
         $i++;
     }
 }
 
+function modifica($id){
+    $con =mysqli_connect('localhost','root','','hoteldb');
+    $query= "select idReservaciones, tipoHabitacion, noches, costo from reservaciones
+    join tipohabitacion
+    on tipohabitacion.idTipoHabitacion = reservaciones.idTipoHabitacion
+    where idUsuario = $id
+    order by idReservaciones"; 
+    $resultado = mysqli_query($con,$query);
+    $arreglo = array();
+    $i = 1;
+    while($row = mysqli_fetch_array($resultado)){
+        $tipohab=$row['tipoHabitacion'];
+        echo '<form method="POST" action="includes/modificaReserva.php">';
+        echo "<tr>";
+        echo "<td>";
+        echo '<input style="border:0px"; type="text"  name="txtID" readonly  value=';
+        echo $row['idReservaciones'];
+        echo ' "/>';
+        $arreglo[$i] = $row['idReservaciones'];
+        echo "</input>";
+        echo "</td>";
+        echo "<td>";
+        echo "<select name='txtTipoHabitacion'>";
+        echo "<option>";
+        echo $row['tipoHabitacion'];
+        echo "</option>";
+        echo "<option>";
+
+        if($tipohab == "Simple"){
+            $tipohab = "Suite";
+            echo $tipohab;
+        }else if ($tipohab=="Suite"){
+            $tipohab="Simple";
+            echo $tipohab;
+        }
+
+        echo "</option>";
+        echo "</td>";
+        echo "<td>";
+        echo '<input type="number" name="txtNoches" value="';
+        echo $row['noches'];
+        echo '"/>';
+        echo "</td>";
+        echo "<td>";
+        echo $row['costo'];
+        echo "</td>";
+        echo "<td>";
+        echo "<button class='btn btn-danger type='submit'>";
+        echo 'Modificar</button>';
+      
+        echo "</td>";
+        echo "</tr>";
+        echo "</form>";
+
+        $i++;
+    }
+}
 function getPrecio($idtipoHabitacion){
     $con =mysqli_connect('localhost','root','','hoteldb');
     $query = "select * from tipohabitacion where idTipoHabitacion=$idtipoHabitacion";

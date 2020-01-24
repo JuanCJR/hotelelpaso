@@ -20,6 +20,9 @@
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+          <a class="nav-link" href="home.php">Inicio <span class="sr-only">(current)</span></a>
+        </li>
         <li class="nav-item active">
           <a class="nav-link" href="nuevaReservacion.php">Nueva reserva <span class="sr-only">(current)</span></a>
         </li>
@@ -28,7 +31,11 @@
         </li>
       </ul>
       <div class="my-2 my-lg-0">
-        <button class="btn btn-outline-danger my-2 my-sm-0">Salir</button>
+        <form action="includes/cerrarSesion.php">
+
+          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Salir</button>
+        </form>
+
       </div>
     </div>
   </nav>

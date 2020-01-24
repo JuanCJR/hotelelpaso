@@ -19,8 +19,7 @@ include('includes/helper.php');
 </head>
 
 <body>
-    <!-- Barra de navegacion -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
       <img src="img/logo.png" width="120" height="40" class="d-inline-block align-top" alt="" />
     </a>
@@ -57,7 +56,7 @@ include('includes/helper.php');
             <div class="col">
 
                 <div class="card">
-                    <div class="card-header text-center">Lista de reservaciones</div>
+                    <div class="card-header text-center">Cambiar Reservas</div>
                     <div class="card-body">
                         <table class="table table-hover table-bordered">
                             <thead>
@@ -72,7 +71,7 @@ include('includes/helper.php');
                                 <?php
                                 session_start();
                                 $id = $_SESSION['id'];
-                                getReservas($id);
+                                modifica($id);
 
                                 ?>
                             </tbody>
