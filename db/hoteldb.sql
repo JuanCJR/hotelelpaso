@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-01-2020 a las 02:29:14
+-- Tiempo de generación: 25-01-2020 a las 22:05:14
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.1.33
 
@@ -40,8 +40,8 @@ CREATE TABLE `disponibilidad` (
 --
 
 INSERT INTO `disponibilidad` (`idDisponibilidad`, `idTipoHabitacion`, `total`, `disponibles`) VALUES
-(1, 1, 20, 15),
-(2, 2, 20, 1);
+(1, 1, 20, 19),
+(2, 2, 20, 18);
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,9 @@ CREATE TABLE `reservaciones` (
 --
 
 INSERT INTO `reservaciones` (`idReservaciones`, `idTipoHabitacion`, `idUsuario`, `costo`, `noches`) VALUES
-(1579828790, 1, 1, 50, 1);
+(1579985725, 1, 1579985697, 100, 2),
+(1579985730, 1, 1579985697, 400, 8),
+(1579985837, 2, 1579985827, 100, 5);
 
 -- --------------------------------------------------------
 
@@ -116,30 +118,18 @@ CREATE TABLE `usuarios` (
   `ci` tinytext DEFAULT NULL,
   `correo` tinytext DEFAULT NULL,
   `idTipoUsuario` int(11) DEFAULT NULL,
-  `contrasena` tinytext DEFAULT NULL
+  `contrasena` tinytext DEFAULT NULL,
+  `telefono` tinytext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`idUsuario`, `Nombre`, `Apellido`, `ci`, `correo`, `idTipoUsuario`, `contrasena`) VALUES
-(1, 'Juan', 'Jimenez', '992756106', 'j@gmail.com', 2, '1234'),
-(2, 'Junco', 'kun', '1323213', 'junco@tkm.com', 2, '1234'),
-(3, 'jj@gmail.com', 'j', '3', 'j@gmail.com', 2, '123445345435'),
-(4, 'j', 'j', '223123213', 'jjwwwj@gmail.com', 2, '324312'),
-(5, 'j', 'j', '223123213', 'jjwwwj@gmail.com', 2, '324312'),
-(6, 'j', 'j', '223123213', 'jjwwwj@gmail.com', 2, '324312'),
-(7, 'j', 'j', '223123213', 'jjwwwj@gmail.com', 2, '324312'),
-(8, 'j', 'j', '223123213', 'jjwwwj@gmail.com', 2, '324312'),
-(9, 'j', 'j', '223123213', 'jjwwwj@gmail.com', 2, '324312'),
-(10, 'Juan', 'Jimenez', '992756106', 'asda@gmail.com', 2, '14123214'),
-(11, 'Jimenez', 'asdasd', '992756109', 'JQJ@gmail.com', 2, '1323123123'),
-(12, 'Juan', 'Jimenez', '992756106', 'jd@gmail.com', 2, '1224312412'),
-(13, 'Juan', 'Jimenez', '992756106', 'as@gmail.com', 2, '12312312421'),
-(14, 'Jimenez', '232', '992756109', 'h@gmail.com', 2, '1223124'),
-(15, 'Jimenez', 'd', '992756109', 'juancarlo14071@gmail.com', 2, '1232134124124'),
-(16, 'Jimenez', 'sdd', '992756109', 'gabyjnsr@gmail.com', 2, '1');
+INSERT INTO `usuarios` (`idUsuario`, `Nombre`, `Apellido`, `ci`, `correo`, `idTipoUsuario`, `contrasena`, `telefono`) VALUES
+(17, 'admin', '', '0', 'admin@hotelelpaso.com', 1, '1234', '2'),
+(1579985697, 'k', 'j', '1', 'j@gmail.com', 2, '1234', '2'),
+(1579985827, 'd', 'd', '1', 'd@gmail.com', 2, '1234', '1');
 
 --
 -- Índices para tablas volcadas
@@ -186,7 +176,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `reservaciones`
 --
 ALTER TABLE `reservaciones`
-  MODIFY `idReservaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1579828791;
+  MODIFY `idReservaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1579985838;
 
 --
 -- AUTO_INCREMENT de la tabla `tipousuario`
@@ -198,7 +188,7 @@ ALTER TABLE `tipousuario`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1579985828;
 
 --
 -- Restricciones para tablas volcadas
