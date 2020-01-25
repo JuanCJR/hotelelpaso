@@ -1,6 +1,7 @@
 <?php
 include('includes/helper.php');
 session_start();
+
 ?>
 
 
@@ -29,26 +30,28 @@ session_start();
         <li class="nav-item active">
           <a class="nav-link" href="home.php">Inicio <span class="sr-only">(current)</span></a>
         </li>
+
         <?php
 
-if ($_SESSION['tipoUsuario'] == 2) {
-  echo '
-<li class="nav-item active">
-<a class="nav-link" href="nuevaReservacion.php">Nueva reserva <span class="sr-only">(current)</span></a>
+        if ($_SESSION['tipoUsuario'] == 2) {
+          echo '
+  <li class="nav-item active">
+  <a class="nav-link" href="nuevaReservacion.php">Nueva reserva <span class="sr-only">(current)</span></a>
 </li>';
-}
-?>
+        }
+        ?>
+
+
         <li class="nav-item">
           <a class="nav-link" href="reservas.php">Lista de Reservas</a>
         </li>
         <?php
-      
-        if ($_SESSION['tipoUsuario'] == 1) {
 
+        if ($_SESSION['tipoUsuario'] == 1) {
           echo '
-          <li class="nav-item">
-          <a class="nav-link" href="usuarios.php">Usuarios</a>
-          </li>';
+        <li class="nav-item">
+        <a class="nav-link" href="usuarios.php">Usuarios</a>
+        </li>';
         }
         ?>
       </ul>
@@ -73,28 +76,31 @@ if ($_SESSION['tipoUsuario'] == 2) {
       <div class="col">
 
         <div class="card">
-          <div class="card-header text-center">Lista de reservaciones</div>
+          <div class="card-header text-center">Lista de Usuarios</div>
           <div class="card-body">
             <table class="table table-hover table-bordered">
               <thead>
-                <th>N° de reserva</th>
-                <th>Tipo de habitacion</th>
-                <th>Noches</th>
-                <th>Costo</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>C.I</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Tipo de Usuario</th>
                 <th></th>
 
               </thead>
               <tbody>
                 <?php
-                $id = $_SESSION['id'];
-                getReservas($id);
+
+                getUsuarios();
 
                 ?>
               </tbody>
             </table>
-
-
+            <a href="./creaUsuario.php" class="btn btn-primary w-100"> Crear Usuario</a>
           </div>
+
         </div>
 
 

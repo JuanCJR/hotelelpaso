@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+        session_start();
 
+?>
 <head>
 
   <meta charset="UTF-8" />
@@ -20,15 +23,34 @@
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+        <li class="nav-item ">
           <a class="nav-link" href="home.php">Inicio <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="nuevaReservacion.php">Nueva reserva <span class="sr-only">(current)</span></a>
-        </li>
+        <?php
+
+        if ($_SESSION['tipoUsuario'] == 2) {
+          echo '
+  <li class="nav-item active">
+  <a class="nav-link" href="nuevaReservacion.php">Nueva reserva <span class="sr-only">(current)</span></a>
+</li>';
+        }
+        ?>
         <li class="nav-item">
           <a class="nav-link" href="reservas.php">Lista de Reservas</a>
         </li>
+        <?php
+
+        if ($_SESSION['tipoUsuario'] == 1) {
+
+          echo '
+          <li class="nav-item">
+          <a class="nav-link" href="usuarios.php">Usuarios</a>
+          </li>';
+        }
+
+        ?>
+
+
       </ul>
       <div class="my-2 my-lg-0">
         <form action="includes/cerrarSesion.php">
@@ -41,7 +63,13 @@
   </nav>
 
   <!-- Carrusel -->
+  <h1>Bienvenido
 
+    <?php
+    echo   $_SESSION['nombre'];
+    ?>
+
+  </h1>
   <div class=" mt-4 w-50  mx-auto">
     <div class="">
       <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -74,8 +102,8 @@
   </div>
 
   <?php
-  session_start();
-  print $_SESSION['id'];
+  //  session_start();
+  // print $_SESSION['id'];
   ?>
 
 

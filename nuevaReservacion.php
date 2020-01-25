@@ -1,5 +1,6 @@
 <?php
 include('includes/helper.php');
+session_start();
 
 ?>
 
@@ -29,12 +30,28 @@ include('includes/helper.php');
       <li class="nav-item active">
           <a class="nav-link" href="home.php">Inicio <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="nuevaReservacion.php">Nueva reserva <span class="sr-only">(current)</span></a>
-        </li>
+        <?php
+
+if ($_SESSION['tipoUsuario'] == 2) {
+  echo '
+<li class="nav-item active">
+<a class="nav-link" href="nuevaReservacion.php">Nueva reserva <span class="sr-only">(current)</span></a>
+</li>';
+}
+?>
         <li class="nav-item">
           <a class="nav-link" href="reservas.php">Lista de Reservas</a>
         </li>
+        <?php
+
+        if ($_SESSION['tipoUsuario'] == 1) {
+
+          echo '
+          <li class="nav-item">
+          <a class="nav-link" href="usuarios.php">Usuarios</a>
+          </li>';
+        }
+?>
       </ul>
       <div class="my-2 my-lg-0">
         <form action="includes/cerrarSesion.php">

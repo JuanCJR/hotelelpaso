@@ -3,8 +3,27 @@
 $id = $_POST['txtID'];
 
 $con =mysqli_connect('localhost','root','','hoteldb');
+$query = "Select * from reservaciones where idReservaciones=$id";
+$resultado1 = mysqli_query($con,$query);
+while($row = mysqli_fetch_array($resultado1)){
+  $idTipoHab = $row['idTipoHabitacion'];
+  $noches = $row['noches'];
+
+}
+$query2 = "Select * from disponibilidad where idTipoHabitacion=$idTipoHab";
+$resultado2 = mysqli_query($con,$query2);
+while($row = mysqli_fetch_array($resultado2)){
+
+  $disponibles  = $row['disponibles'];
+
+}
+$queryActualizaDisp = "update disponibilidad set disponibles = $disponibles+$noches where idTipoHabitacion=$idTipoHab";
+$resultado3 = mysqli_query($con,$queryActualizaDisp);
+
 $deleteQuery = "delete from reservaciones where idReservaciones=$id";
-$resultado = mysqli_query($con,$deleteQuery);
+$resultado4 = mysqli_query($con,$deleteQuery);
+
+
 
 echo '
 <html lang="en">

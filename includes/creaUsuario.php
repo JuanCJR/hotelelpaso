@@ -6,17 +6,18 @@ $apellido = $_POST['txtApellido'];
 $tlf = $_POST['txtTelefono'];
 $passwd = $_POST['txtContrasena'];
 $ci = $_POST['txtCI'];
-//Creacion de conexion
-
-$con =mysqli_connect('localhost','root','','hoteldb');
-
+$tipoUsuario = $_POST['txtTipoUsuario'];
 $hoy = getdate();
 $id= $hoy['0'];
+echo $tipoUsuario;
+$con =mysqli_connect('localhost','root','','hoteldb');
 
-$consulta2="INSERT INTO usuarios VALUES ($id,'$nombre','$apellido',$ci,'$email',2,$passwd,$tlf)";
-$resultado2 = mysqli_query($con,$consulta2);
+$query="INSERT INTO usuarios VALUES ($id,'$nombre','$apellido',$ci,'$email',$tipoUsuario,$passwd,$tlf)";
+echo $query;
+$resultado = mysqli_query($con,$query);
 
-if($resultado2==1){
+
+if($resultado==1){
     echo '
     <html lang="en">
 
@@ -40,7 +41,7 @@ if($resultado2==1){
     
     ';
     echo "<h1 class='m-4'>Usuario creado con exito!!</h1>";
-    echo "<a class='btn btn-success m-4' href='../index.html'>Volver..</a>";
+    echo "<a class='btn btn-success m-4' href='../usuarios.php'>Volver..</a>";
 
 
     echo '
@@ -74,7 +75,7 @@ if($resultado2==1){
   
   ';
   echo "<h1 class='m-4'>Error!! no se ha creado el usuario</h1>";
-  echo "<a class='btn btn-success m-4' href='../index.html'>Volver..</a>";
+  echo "<a class='btn btn-success m-4' href='../usuarios.php'>Volver..</a>";
 
 
   echo '
@@ -85,5 +86,4 @@ if($resultado2==1){
 
 </html>';
 }
-
 ?>

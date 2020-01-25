@@ -11,9 +11,11 @@ $resultTipoHab = mysqli_query($con,$QueryIdTipoHabitacion1);
 
 while($row=mysqli_fetch_array($resultTipoHab)){{
     $idTipoHab = $row['idTipoHabitacion'];
+    $precio = $row['precio'];
 }}
 
-$modificaQuery = "update reservaciones set noches=$noches, idTipoHabitacion=$idTipoHab where idReservaciones=$ID";
+$costoFinal = $precio*$noches;
+$modificaQuery = "update reservaciones set noches=$noches,costo=$costoFinal, idTipoHabitacion=$idTipoHab where idReservaciones=$ID";
 $resultado = mysqli_query($con,$modificaQuery);
 
 

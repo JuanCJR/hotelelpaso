@@ -63,7 +63,7 @@ if($disponibles<$noches){
       </html>';
 }else{
     $queryNuevaReserva = "insert into reservaciones values($id,$tipoHabitacion,$idUsuario,$precioFinal,$noches)";
-    echo $queryNuevaReserva;
+   
     $queryActualizaDisp = "UPDATE disponibilidad set disponibles=$disponibles-1 where idTipoHabitacion=$tipoHabitacion";
     $rs4 = mysqli_query($con,$queryNuevaReserva);
     $rs5 = mysqli_query($con,$queryActualizaDisp);
@@ -107,7 +107,7 @@ if($disponibles<$noches){
         <th scope="col">Numero de noches</th>
         <td>';
         echo $noches;
-        echo'$
+        echo'
         </td>
         </tr>
         </table>

@@ -1,6 +1,7 @@
 <?php
 include('includes/helper.php');
 session_start();
+
 ?>
 
 
@@ -42,7 +43,7 @@ if ($_SESSION['tipoUsuario'] == 2) {
           <a class="nav-link" href="reservas.php">Lista de Reservas</a>
         </li>
         <?php
-      
+
         if ($_SESSION['tipoUsuario'] == 1) {
 
           echo '
@@ -67,34 +68,57 @@ if ($_SESSION['tipoUsuario'] == 2) {
 
 
 
-  <!-- Nueva reservacion -->
-  <div class="container  ">
-    <div class="row">
-      <div class="col">
+  <!-- -->
+  <div class="container-fluid  ">
+    <div class="row w-100">
+      <div class="col w-100">
 
-        <div class="card">
-          <div class="card-header text-center">Lista de reservaciones</div>
+        <div class="card w-100">
+          <div class="card-header text-center">Creacion de usuario</div>
           <div class="card-body">
-            <table class="table table-hover table-bordered">
-              <thead>
-                <th>N° de reserva</th>
-                <th>Tipo de habitacion</th>
-                <th>Noches</th>
-                <th>Costo</th>
-                <th></th>
+            <!-- formulario -->
+            <form class="text-left" method="POST" action="includes/creaUsuario.php">
+              <div class="form-group">
+                <label for="txtNombre">Nombres</label>
+                <input type="text" class="form-control" name="txtNombre" id="txtNombre" required />
+              </div>
+              <div class="form-group">
+                <label for="txtApellido">Apellidos</label>
+                <input type="text" class="form-control" name="txtApellido" id="txtApellido" required />
+              </div>
+              <div class="form-group">
+                <label for="txtCI">C.I</label>
+                <input type="number" class="form-control" name="txtCI" id="txtCI" required />
+              </div>
+              <div class="form-group">
+                <label for="txtTelefono">Telefono</label>
+                <input type="number" class="form-control" name="txtTelefono" id="txtTelefono" required />
+              </div>
 
-              </thead>
-              <tbody>
-                <?php
-                $id = $_SESSION['id'];
-                getReservas($id);
+              <div class="form-group">
+                <label for="txtEmail">Email</label>
+                <input type="email" class="form-control" name="txtEmail" id="txtEmail" required />
+              </div>
+              <div class="form-group">
+                <label for="txtTipoUsuario">Tipo de Usuario</label>
+                <select name="txtTipoUsuario">
+                  <option value="1">administrador</option>
+                  <option value="2">cliente</option>
 
-                ?>
-              </tbody>
-            </table>
+                </select>
+              </div>
+              <div class="
+                <div class=" form-group">
+                <label for="txtContrasena">Contraseña</label>
+                <input type="password" name="txtContrasena" class="form-control" id="txtContrasena" required />
+              </div>
 
-
+              <button type="submit" class="btn btn-primary mt-3" style="margin-left: 45%;">
+                Crear
+              </button>
+            </form>
           </div>
+
         </div>
 
 
