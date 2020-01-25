@@ -32,6 +32,7 @@ session_start();
         </li>
 
         <?php
+                //Si el usuario es de tipo cliente podra tener la opcion de nueva reserva
 
         if ($_SESSION['tipoUsuario'] == 2) {
           echo '
@@ -46,6 +47,7 @@ session_start();
           <a class="nav-link" href="reservas.php">Lista de Reservas</a>
         </li>
         <?php
+                //Si el usuario es de tipo administrador podra tener la opcion de usuarios
 
         if ($_SESSION['tipoUsuario'] == 1) {
           echo '

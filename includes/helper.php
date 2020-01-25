@@ -1,14 +1,19 @@
 <?php
 
 
-//Obtener lista de usuarios
-
+//Funcion para obtener lista de usuarios
 function getUsuarios(){
+    //Creacion de conexion
     $con =mysqli_connect('localhost','root','','hoteldb');
+   
+    //query de query para conseguir lista de usuarios
     $query = "select idUsuario, Nombre, Apellido, ci, correo, tipoUsuario, telefono from usuarios
     join tipousuario
     on tipousuario.idTipoUsuario = usuarios.idTipoUsuario";
+
+    //ejecucion de query
     $resultado = mysqli_query($con,$query);
+    //while que devuelve el listado de todos los usuarios conseguidos
     while($row = mysqli_fetch_array($resultado)){
         echo '<form method="POST" action="includes/eliminaUsuario.php">';
         echo "<tr>";
@@ -51,38 +56,43 @@ function getUsuarios(){
 
 
 
-//obtiene habitaciones disponibles
+//funcion que obtiene habitaciones disponibles
 function getHabDisponible($idtipoHabitacion){
+    //Creacion de conexion
     $con =mysqli_connect('localhost','root','','hoteldb');
+    //query para obtener habitaciones disponibles
     $query = "select * from disponibilidad where idTipoHabitacion=$idtipoHabitacion";
+    //ejecucion de query
     $resultado = mysqli_query($con,$query);
 
     while($row=mysqli_fetch_array($resultado)){
-        $disponibles = $row['disponibles'];
+        $disponibles = $row['disponibles'];//Rescatamos las habitaciones dispobibles del tipo de habitacion buscada
     }
 
-    return $disponibles;
+    return $disponibles; // retornamos las habitaciones disponibles
 
 } 
 
-//obtiene reservas
+//funcion que obtiene reservas por id de usuario
 function getReservas($id){
+    //creacion de conexion
     $con =mysqli_connect('localhost','root','','hoteldb');
-    
+    //si el usuario es administrador puede ver todas las reservas de todos los usuarios
     if($_SESSION['tipoUsuario'] == 1){
         $query= "select idReservaciones, tipoHabitacion, noches, costo from reservaciones
         join tipohabitacion
         on tipohabitacion.idTipoHabitacion = reservaciones.idTipoHabitacion";
     }else{
+        //si el usuario es cliente solo puede ver sus propias reservaciones
         $query= "select idReservaciones, tipoHabitacion, noches, costo from reservaciones
     join tipohabitacion
     on tipohabitacion.idTipoHabitacion = reservaciones.idTipoHabitacion
     where idUsuario = $id"; 
     }
-    
+    //ejecucion de query
     $resultado = mysqli_query($con,$query);
-    $arreglo = array();
-    $i = 1;
+
+    //while que devuelve el listado de reservas
     while($row = mysqli_fetch_array($resultado)){
         echo '<form method="POST" action="includes/deleteReserva.php">';
         echo "<tr>";
@@ -90,7 +100,6 @@ function getReservas($id){
         echo '<input style="border:0px"; type="text" readonly name="txtID" value=';
         echo $row['idReservaciones'];
         echo ' "/>';
-        $arreglo[$i] = $row['idReservaciones'];
         echo "</input>";
         echo "</td>";
         echo "<td>";
@@ -111,19 +120,22 @@ function getReservas($id){
         echo "</tr>";
         echo "</form>";
 
-        $i++;
     }
 }
-//Modifica reserva
+
+// funcion para Modificar reserva
 function modifica($id){
+    //Creacion de conexion
     $con =mysqli_connect('localhost','root','','hoteldb');
- 
+    
+    //si el usuario es administrador puede modificar todas las reservas
     if($_SESSION['tipoUsuario'] == 1){
         $query= "select idReservaciones, tipoHabitacion, noches, costo from reservaciones
         join tipohabitacion
         on tipohabitacion.idTipoHabitacion = reservaciones.idTipoHabitacion
         order by idReservaciones"; 
     }else{
+        //si el usuario es cliente solo puede modificar sus reservas
         $query= "select idReservaciones, tipoHabitacion, noches, costo from reservaciones
         join tipohabitacion
         on tipohabitacion.idTipoHabitacion = reservaciones.idTipoHabitacion
@@ -131,10 +143,9 @@ function modifica($id){
         order by idReservaciones"; 
     }
  
-
+    //ejecucion de query
     $resultado = mysqli_query($con,$query);
-    $arreglo = array();
-    $i = 1;
+   //while que devuelve lista de todas las reservaciones a modificar
     while($row = mysqli_fetch_array($resultado)){
         $tipohab=$row['tipoHabitacion'];
         echo '<form method="POST" action="includes/modificaReserva.php">';
@@ -143,7 +154,6 @@ function modifica($id){
         echo '<input style="border:0px"; type="text"  name="txtID" readonly  value=';
         echo $row['idReservaciones'];
         echo ' "/>';
-        $arreglo[$i] = $row['idReservaciones'];
         echo "</input>";
         echo "</td>";
         echo "<td>";
@@ -179,18 +189,20 @@ function modifica($id){
         echo "</tr>";
         echo "</form>";
 
-        $i++;
     }
 }
-//Obtiene precio de habitacion
+//funcion que Obtiene precio de habitacion
 function getPrecio($idtipoHabitacion){
+    //Creacion de conexion
     $con =mysqli_connect('localhost','root','','hoteldb');
+    //query para obtener informacion de la tabla de tipohabitacion por id de tipo de habitacion
     $query = "select * from tipohabitacion where idTipoHabitacion=$idtipoHabitacion";
+    //ejecucion de consulta
     $resultado = mysqli_query($con,$query);
     while($row=mysqli_fetch_array($resultado)){
-        $precio = $row['precio'];
+        $precio = $row['precio']; //rescatamos precio de la habitacion buscada
     }
-    return $precio;
+    return $precio; //Retornamos el precio de la habitacion buscada
 }
 
 

@@ -30,6 +30,7 @@ session_start();
           <a class="nav-link" href="home.php">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <?php
+                //Si el usuario es de tipo cliente podra tener la opcion de nueva reserva
 
 if ($_SESSION['tipoUsuario'] == 2) {
   echo '
@@ -42,6 +43,7 @@ if ($_SESSION['tipoUsuario'] == 2) {
           <a class="nav-link" href="reservas.php">Lista de Reservas</a>
         </li>
         <?php
+                //Si el usuario es de tipo administrador podra tener la opcion de usuarios
       
         if ($_SESSION['tipoUsuario'] == 1) {
 
@@ -87,6 +89,7 @@ if ($_SESSION['tipoUsuario'] == 2) {
               <tbody>
                 <?php
                 $id = $_SESSION['id'];
+                //Retorna lista de reservas por id de usuario
                 getReservas($id);
 
                 ?>

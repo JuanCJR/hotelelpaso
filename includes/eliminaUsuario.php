@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+//validacion para que no pueda eliminar el usuario admin
 if ($_POST['txtNombre']=="admin"){
   
     echo '
@@ -38,12 +39,14 @@ if ($_POST['txtNombre']=="admin"){
     </html>';
     
 }else{
+//rescate de informacion de formulario
     $id = $_POST['txtID'];
+    //Creacion de conexion
     $con =mysqli_connect('localhost','root','','hoteldb');
-    
+    //query para eliminacion de usuario por id de usuario
     $queryDelete = "delete from usuarios where idUsuario=$id";
+    //ejecucion de query
     $resultado = mysqli_query($con,$queryDelete);
-    
     
     echo '
     <html lang="en">

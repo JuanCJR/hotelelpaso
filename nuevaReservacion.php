@@ -22,46 +22,48 @@ session_start();
 <body>
     <!-- Barra de navegacion -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <img src="img/logo.png" width="120" height="40" class="d-inline-block align-top" alt="" />
-    </a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-          <a class="nav-link" href="home.php">Inicio <span class="sr-only">(current)</span></a>
-        </li>
-        <?php
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.png" width="120" height="40" class="d-inline-block align-top" alt="" />
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="home.php">Inicio <span class="sr-only">(current)</span></a>
+                </li>
 
-if ($_SESSION['tipoUsuario'] == 2) {
-  echo '
+
+                <?php
+                //Si el usuario es de tipo cliente podra tener la opcion de nueva reserva
+                if ($_SESSION['tipoUsuario'] == 2) {
+                    echo '
 <li class="nav-item active">
 <a class="nav-link" href="nuevaReservacion.php">Nueva reserva <span class="sr-only">(current)</span></a>
 </li>';
-}
-?>
-        <li class="nav-item">
-          <a class="nav-link" href="reservas.php">Lista de Reservas</a>
-        </li>
-        <?php
+                }
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="reservas.php">Lista de Reservas</a>
+                </li>
+                <?php
+                //Si el usuario es de tipo administrador podra tener la opcion de usuarios
+                if ($_SESSION['tipoUsuario'] == 1) {
 
-        if ($_SESSION['tipoUsuario'] == 1) {
-
-          echo '
+                    echo '
           <li class="nav-item">
           <a class="nav-link" href="usuarios.php">Usuarios</a>
           </li>';
-        }
-?>
-      </ul>
-      <div class="my-2 my-lg-0">
-        <form action="includes/cerrarSesion.php">
+                }
+                ?>
+            </ul>
+            <div class="my-2 my-lg-0">
+                <form action="includes/cerrarSesion.php">
 
-          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Salir</button>
-        </form>
+                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Salir</button>
+                </form>
 
-      </div>
-    </div>
-  </nav>
+            </div>
+        </div>
+    </nav>
 
     <!-- Nueva reservacion -->
 
@@ -106,7 +108,7 @@ if ($_SESSION['tipoUsuario'] == 2) {
                             <h3><input type="checkbox" name="txtTipo" id="cbox1" value="2" laceholder=""> Habitaciones disponibles:
 
                                 <?php
-
+                                //Devuelve las habitaciones disponibles del tipo simple
                                 $disponibles = getHabDisponible(2);
                                 echo $disponibles;
 
@@ -120,14 +122,14 @@ if ($_SESSION['tipoUsuario'] == 2) {
                             <br>
                             <div>Valor de la noche:
                                 <?php
-
+                            //Devuelve el precio de las habitaciones de tipo simple
                                 echo getPrecio(2);
                                 echo "$";
                                 ?>
 
                             </div>
                             <br>
-                            
+
 
                             <button class="btn btn-primary" type="submit">Aceptar</button>
                         </form>
@@ -178,6 +180,8 @@ if ($_SESSION['tipoUsuario'] == 2) {
 
                             <h3><input type="checkbox" name="txtTipo" id="cbox1" value="1" laceholder=""> Habitaciones disponibles:
                                 <?php
+                                //Devuelve las habitaciones disponibles del tipo suite
+
                                 $disponibles2 = getHabDisponible(1);
                                 echo $disponibles2;
 
@@ -188,6 +192,7 @@ if ($_SESSION['tipoUsuario'] == 2) {
                             <br>
                             <div>Valor de la noche:
                                 <?php
+                                //Devuelve el precio de las habitaciones del tipo suite
 
                                 echo getPrecio(1);
                                 echo "$";

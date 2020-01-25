@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+//Rescate de informacion de formulario
 $idUsuario=$_SESSION['id']; 
 $noches = $_POST['txtNoches'];
 $tipoHabitacion = $_POST['txtTipo'];
@@ -7,26 +9,29 @@ $tipoHabitacion = $_POST['txtTipo'];
 //Creacion de conexion
 $con =mysqli_connect('localhost','root','','hoteldb');
 
+//
 $hoy = getdate();
 $id= $hoy['0'];
 
+//Query para obtener informacion del tipo de habitacion que se reservara
 $queryTipoHabitacion = "select * from tipohabitacion where idTipoHabitacion=$tipoHabitacion";
 $rs2 = mysqli_query($con,$queryTipoHabitacion);
 
 while($row=mysqli_fetch_array($rs2)){{
-    $precio = $row['precio'];
+    $precio = $row['precio'];//Rescate del precio
 }}
-
+//Calculo del precio final por las noches reservadas
 $precioFinal = $precio*$noches;
 
-
+//query para evaluar disponibilidad de la habitacion que se quiere reservar
 $queryDisponibilidad = "Select * from disponibilidad where idTipoHabitacion=$tipoHabitacion" ;
 $rs3 = mysqli_query($con,$queryDisponibilidad);
 
 while($row2 =mysqli_fetch_array($rs3)){
-    $disponibles=$row2['disponibles'];
+    $disponibles=$row2['disponibles'];//Rescate de habitaciones disponibles
    
 }
+//valida si las habitaciones disponibles son menores a las noches que se quieren reservar
 if($disponibles<$noches){
     echo '
         <html lang="en">

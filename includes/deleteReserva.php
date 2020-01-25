@@ -1,26 +1,38 @@
 <?php
-
+//recepcion de valor del formulario
 $id = $_POST['txtID'];
 
+//Creacion de conexion a bd
 $con =mysqli_connect('localhost','root','','hoteldb');
+
+//query para obtener informacion de reservaciones por el id de reservacion
 $query = "Select * from reservaciones where idReservaciones=$id";
+//ejecucion de consulta
 $resultado1 = mysqli_query($con,$query);
+//recorrido del resultado de la query
 while($row = mysqli_fetch_array($resultado1)){
-  $idTipoHab = $row['idTipoHabitacion'];
-  $noches = $row['noches'];
+
+  $idTipoHab = $row['idTipoHabitacion']; //rescatamos id del tipo de habitacion de la reservacion buscada
+  $noches = $row['noches']; // rescatamos las noches de la reservacion buscada
 
 }
+//query para obtener datos de la disponibilidad por el id del tipo de habitacion
 $query2 = "Select * from disponibilidad where idTipoHabitacion=$idTipoHab";
+//ejecucion de query
 $resultado2 = mysqli_query($con,$query2);
+//recorrido de resultado
 while($row = mysqli_fetch_array($resultado2)){
 
-  $disponibles  = $row['disponibles'];
+  $disponibles  = $row['disponibles'];//Rescatamos las habitaciones disponibles del tipo de habitacion buscada
 
 }
+//query para actualizar la disponibilidad del tipo de habitacion buscada
 $queryActualizaDisp = "update disponibilidad set disponibles = $disponibles+$noches where idTipoHabitacion=$idTipoHab";
+//Ejecucion de query
 $resultado3 = mysqli_query($con,$queryActualizaDisp);
-
+//query para eliminacion de reserva por id de reservacion
 $deleteQuery = "delete from reservaciones where idReservaciones=$id";
+//ejecucion de query
 $resultado4 = mysqli_query($con,$deleteQuery);
 
 

@@ -1,21 +1,28 @@
 <?php
 
+//Recepcion de valores de formulario 
 $email = $_POST['txtEmail'];
 $nombre = $_POST['txtNombre'];
 $apellido = $_POST['txtApellido'];
 $tlf = $_POST['txtTelefono'];
 $passwd = $_POST['txtContrasena'];
 $ci = $_POST['txtCI'];
-//Creacion de conexion
 
+//Creacion de conexion
 $con =mysqli_connect('localhost','root','','hoteldb');
 
+//objeto de fecha actual
 $hoy = getdate();
+//guardamos los datos de la fecha/hora convertido en milisegundo
 $id= $hoy['0'];
 
+//query para insercion de datos en tabla de usuarios
 $consulta2="INSERT INTO usuarios VALUES ($id,'$nombre','$apellido',$ci,'$email',2,$passwd,$tlf)";
+
+//ejecucion de query
 $resultado2 = mysqli_query($con,$consulta2);
 
+//Condicion si se ingresa correctamente el usuario
 if($resultado2==1){
     echo '
     <html lang="en">

@@ -1,14 +1,21 @@
 <?php
-
+//Recepcion de valores de formulario 
 $email = $_POST['txtEmail'];
 $passwd = $_POST['txtContrasena'];
 
 //Creacion de conexion
 $con =mysqli_connect('localhost','root','','hoteldb');
+
+//query para para validar si el usuario/contraseña ingresados son correctos
 $consulta = "SELECT * FROM usuarios where correo='$email' and contrasena='$passwd' ";
+//ejecucion de query
 $resultado = mysqli_query($con,$consulta);
+
+//cuenta cuantos registros arrojo la query
 $counter=mysqli_num_rows($resultado);
 
+
+//Si la query devuelve 1 resultado los datos ingresados son correctos
 if($counter==1){
     session_start();
 

@@ -1,21 +1,27 @@
 <?php
-
+//Rescate de informacion de formulario
 $noches = $_POST['txtNoches'];
 $tipoHabitacion = $_POST['txtTipoHabitacion'];
 $ID = $_POST['txtID'];
 
+//Creacion de conexion
 $con =mysqli_connect('localhost','root','','hoteldb');
+//query para obtener informacion del tipo de habitacion por el nombre del tipo de habitacion
 $QueryIdTipoHabitacion1 = "select * from tipoHabitacion where tipoHabitacion='$tipoHabitacion'";
+//ejecucion de query
 $resultTipoHab = mysqli_query($con,$QueryIdTipoHabitacion1);
 
 
 while($row=mysqli_fetch_array($resultTipoHab)){{
-    $idTipoHab = $row['idTipoHabitacion'];
-    $precio = $row['precio'];
+    $idTipoHab = $row['idTipoHabitacion'];//rescatams el id del tipo de habitacion 
+    $precio = $row['precio'];//rescatamos el precio de la habitacion buscada
 }}
 
+//Calculamos nuevo costo de la reserva
 $costoFinal = $precio*$noches;
+//query para modificar la reservacion
 $modificaQuery = "update reservaciones set noches=$noches,costo=$costoFinal, idTipoHabitacion=$idTipoHab where idReservaciones=$ID";
+//ejecucion de query
 $resultado = mysqli_query($con,$modificaQuery);
 
 

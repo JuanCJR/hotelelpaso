@@ -1,5 +1,5 @@
 <?php
-
+//Recepcion de datos del formualrios
 $email = $_POST['txtEmail'];
 $nombre = $_POST['txtNombre'];
 $apellido = $_POST['txtApellido'];
@@ -10,13 +10,16 @@ $tipoUsuario = $_POST['txtTipoUsuario'];
 $hoy = getdate();
 $id= $hoy['0'];
 echo $tipoUsuario;
+
+//Creacion de conexion
 $con =mysqli_connect('localhost','root','','hoteldb');
 
+//Query para la insercion de datos en tabla de usuarios
 $query="INSERT INTO usuarios VALUES ($id,'$nombre','$apellido',$ci,'$email',$tipoUsuario,$passwd,$tlf)";
-echo $query;
+//ejecucion de query
 $resultado = mysqli_query($con,$query);
 
-
+//valida si el resultado es = 1 el usuario ha sido insertado
 if($resultado==1){
     echo '
     <html lang="en">

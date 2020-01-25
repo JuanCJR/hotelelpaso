@@ -31,6 +31,7 @@ session_start();
           <a class="nav-link" href="home.php">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <?php
+                //Si el usuario es de tipo cliente podra tener la opcion de nueva reserva
 
 if ($_SESSION['tipoUsuario'] == 2) {
   echo '
@@ -43,6 +44,7 @@ if ($_SESSION['tipoUsuario'] == 2) {
           <a class="nav-link" href="reservas.php">Lista de Reservas</a>
         </li>
         <?php
+                //Si el usuario es de tipo administrador podra tener la opcion de usuarios
 
         if ($_SESSION['tipoUsuario'] == 1) {
 
@@ -76,7 +78,7 @@ if ($_SESSION['tipoUsuario'] == 2) {
         <div class="card w-100">
           <div class="card-header text-center">Creacion de usuario</div>
           <div class="card-body">
-            <!-- formulario -->
+            <!-- formulario  de creacion de usuario-->
             <form class="text-left" method="POST" action="includes/creaUsuario.php">
               <div class="form-group">
                 <label for="txtNombre">Nombres</label>
